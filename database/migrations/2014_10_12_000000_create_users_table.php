@@ -17,9 +17,8 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('cpf', 11)->unique();
-            $table->string('phone', 11);
+            $table->string('phone', 11)->unique();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

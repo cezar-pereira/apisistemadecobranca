@@ -18,7 +18,7 @@ class CreatePaymentslipsTable extends Migration
             $table->date('dueDate');
             $table->double('value', 8, 2);
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

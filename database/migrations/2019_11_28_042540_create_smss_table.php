@@ -19,7 +19,7 @@ class CreateSmssTable extends Migration
             $table->time('sendHour');
             $table->string('message', 160);
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
