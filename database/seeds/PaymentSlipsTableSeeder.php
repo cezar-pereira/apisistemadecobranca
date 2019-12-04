@@ -11,9 +11,9 @@ class PaymentSlipsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('paymentslips')->delete();
+        DB::table('payment_slips')->delete();
 
-        DB::table('paymentslips')->insert(array(
+        DB::table('payment_slips')->insert(array(
             0 => array(
                 'id' => 1,
                 'dueDate' => '2019-01-01',

@@ -48,4 +48,13 @@ class UserController extends Controller
     else
         return response()->json($data);
     }
+
+
+    public function paymentslip($id)
+    {
+        if(!$data = $this->user->with('paymentslip')->find($id))
+        return response()->json(['error' => 'Nada encontrado'], 404);
+    else
+        return response()->json($data);
+    }
 }
