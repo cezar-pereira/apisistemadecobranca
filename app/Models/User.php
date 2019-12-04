@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Sms;
 
 class User extends Authenticatable
 {
@@ -19,8 +20,13 @@ class User extends Authenticatable
         return [
             'name' => 'required',
             'cpf' => 'bail|required|max:11|min:11|unique:users',
-            'phone' => 'required||max:11|min:11|unique:users',
+            'phone' => 'bail|required||max:11|min:11|unique:users',
         ];
+    }
+
+    public function sms()
+    {
+        return $this->hasMany(Sms::class, 'user_id','id');
     }
 
 

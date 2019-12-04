@@ -5,4 +5,8 @@
 //     return $request->user();
 // });
 
-Route::apiResource('user', 'api\UserController');
+Route::get('user/{id}/sms', 'Api\UserController@sms');
+Route::apiResource('user', 'Api\UserController');
+
+Route::get('sms/{id}/user', 'Api\SmsController@user');
+Route::apiResource('sms', 'Api\SmsController');

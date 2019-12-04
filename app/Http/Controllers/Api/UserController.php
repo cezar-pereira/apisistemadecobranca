@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\models\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function __construct(User $user){
+    public function __construct(User $user, Request $request){
         $this->user = $user;
+        $this->request = $request;
     }
     public function index()
     {
@@ -20,7 +21,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate($this->user->rules());
-        User::create($request->all());
+        // User::create($request->all());
     }
 
     public function show($id)
@@ -38,5 +39,13 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
+    }
+
+    public function sms($id)
+    {
+        if(!$data = $this->user->with('sms')->find($id))
+        return response()->json(['error' => 'Nada encontrado'], 404);
+    else
+        return response()->json($data);
     }
 }
