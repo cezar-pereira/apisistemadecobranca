@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -14,14 +15,12 @@ class UserController extends Controller
     }
     public function index()
     {
-        // dd(User::all());
        return User::all();
     }
 
-    public function store(Request $request)
+    public function store(StoreUpdateUserRequest $request)
     {
-        $request->validate($this->user->rules());
-        // User::create($request->all());
+        User::create($request->all());
     }
 
     public function show($id)
@@ -44,16 +43,15 @@ class UserController extends Controller
     public function sms($id)
     {
         if(!$data = $this->user->with('sms')->find($id))
-        return response()->json(['error' => 'Nada encontrado'], 404);
+        return response()->json(['error' => 'Usuário não encontrado'], 404);
     else
         return response()->json($data);
     }
 
-
     public function paymentslip($id)
     {
         if(!$data = $this->user->with('paymentslip')->find($id))
-        return response()->json(['error' => 'Nada encontrado'], 404);
+        return response()->json(['error' => 'Usuário não encontrado'], 404);
     else
         return response()->json($data);
     }

@@ -15,8 +15,6 @@ class CreateSmsTable extends Migration
     {
         Schema::create('sms', function (Blueprint $table) {
             $table->bigIncrements('id');
-            // $table->date('sendDate');
-            // $table->time('sendHour');
             $table->string('message', 160);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

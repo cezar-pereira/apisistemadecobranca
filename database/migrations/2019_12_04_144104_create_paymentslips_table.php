@@ -16,6 +16,7 @@ class CreatePaymentslipsTable extends Migration
         Schema::create('payment_slips', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->date('dueDate');
+            $table->string('details', 1000);
             $table->double('value', 8, 2);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

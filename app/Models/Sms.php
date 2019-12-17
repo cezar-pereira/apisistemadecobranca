@@ -11,13 +11,6 @@ class Sms extends Model
         'message', 'user_id',
     ];
 
-    public function rules()
-    {
-        return [
-            'message' => 'required|max:160',
-            'user_id' => 'required',
-        ];
-    }
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');

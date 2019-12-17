@@ -16,15 +16,6 @@ class User extends Authenticatable
         'name', 'cpf', 'phone',
     ];
 
-    public function rules()
-    {
-        return [
-            'name' => 'required',
-            'cpf' => 'bail|required|max:11|min:11|unique:users',
-            'phone' => 'bail|required||max:11|min:11|unique:users',
-        ];
-    }
-
     public function sms()
     {
         return $this->hasMany(Sms::class, 'user_id','id');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdateSmsRequest;
 use App\Models\Sms;
 use Illuminate\Http\Request;
 
@@ -19,11 +20,8 @@ class SmsController extends Controller
         return Sms::all();
     }
 
-    public function store(Request $request)
+    public function store(StoreUpdateSmsRequest $request)
     {
-
-        // $request->validate($this->sms->rules());
-        // return "oi";
         Sms::create($request->all());
     }
 
@@ -35,7 +33,7 @@ class SmsController extends Controller
     public function user($id)
     {
         if(!$data = $this->sms->with('user')->find($id))
-            return response()->json(['error' => 'Nada encontrado'], 404);
+            return response()->json(['error' => 'Usuário não encontrado'], 404);
         else
             return response()->json($data);
     }

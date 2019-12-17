@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdatePaymentSlipRequest;
 use App\Models\PaymentSlip;
 use Illuminate\Http\Request;
 
@@ -19,14 +20,14 @@ class PaymentSlipController extends Controller
         return PaymentSlip::all();
     }
 
-    public function store(Request $request)
+    public function store(StoreUpdatePaymentSlipRequest $request)
     {
-        //
+        PaymentSlip::create($request->all());
     }
 
     public function show($id)
     {
-        //
+        return PaymentSlip::findOrFail($id);
     }
 
     public function update(Request $request, $id)
@@ -41,7 +42,7 @@ class PaymentSlipController extends Controller
     public function user($id)
     {
         if(!$data = $this->paymentSlip->with('user')->find($id))
-            return response()->json(['error' => 'Nada encontrado'], 404);
+            return response()->json(['error' => 'Usuário não encontrado'], 404);
         else
             return response()->json($data);
     }
