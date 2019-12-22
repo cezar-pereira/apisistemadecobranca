@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class SmsController extends Controller
 {
+    private $itemsPerPage = 10;
 
     public function __construct(Sms $sms, Request $request) {
         $this->sms = $sms;
@@ -17,7 +18,7 @@ class SmsController extends Controller
 
     public function index()
     {
-        return Sms::all();
+        return Sms::paginate($this->itemsPerPage);
     }
 
     public function store(StoreUpdateSmsRequest $request)

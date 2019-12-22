@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class PaymentSlipController extends Controller
 {
+    private $itemsPerPage = 10;
 
     public function __construct(PaymentSlip $paymentSlip, Request $request) {
         $this->paymentSlip = $paymentSlip;
@@ -17,7 +18,7 @@ class PaymentSlipController extends Controller
 
     public function index()
     {
-        return PaymentSlip::all();
+        return PaymentSlip::paginate($this->itemsPerPage);
     }
 
     public function store(StoreUpdatePaymentSlipRequest $request)

@@ -9,13 +9,15 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    private $itemsPerPage = 10;
+
     public function __construct(User $user, Request $request){
         $this->user = $user;
         $this->request = $request;
     }
     public function index()
     {
-       return User::all();
+       return User::paginate($this->itemsPerPage);
     }
 
     public function store(StoreUpdateUserRequest $request)
